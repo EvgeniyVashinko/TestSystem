@@ -8,7 +8,12 @@ namespace TestSystem.Models
 {
     public class Answer
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public bool IsTrue { get; set; }
+        public Answer()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

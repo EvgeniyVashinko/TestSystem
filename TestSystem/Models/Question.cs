@@ -10,10 +10,12 @@ namespace TestSystem.Models
 {
     public class Question : BindableBase
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public ObservableCollection<Answer> Answers { get; set; }
         public Question()
         {
+            Id = Guid.NewGuid();
             Answers = new ObservableCollection<Answer>();
         }
     }
