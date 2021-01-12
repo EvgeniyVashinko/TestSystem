@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:TestSystem"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <local:ViewModelLocator x:Key="VmLocator"/>
     </Application.Resources>
 </Application>
