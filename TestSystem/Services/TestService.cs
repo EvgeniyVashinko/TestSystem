@@ -5,7 +5,7 @@ using TestSystem.Models;
 
 namespace TestSystem.Services
 {
-    class TestService
+    public class TestService
     {
         private readonly DialogService _dialogService;
         private readonly FileService _fileService;

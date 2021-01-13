@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace TestSystem.Services
         private readonly string _path = @$"C:\Users\{Environment.UserName}\Documents";
         private readonly string _subpath = @"TestSystem\tests";
 
-        public string GetFilePath(Guid testId) => @$"C:\Users\{Environment.UserName}\Documents\testDotNet\tests\{testId}.json";
+        public string GetFilePath(Guid testId) => @$"C:\Users\{Environment.UserName}\Documents\testSystem\tests\{testId}.json";
 
         public void SaveTestFile(Test test)
         {

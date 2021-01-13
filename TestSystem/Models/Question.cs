@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TestSystem.Models
 {
-    public class Question : BindableBase
+    public class Question
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

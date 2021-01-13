@@ -7,79 +7,30 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using DevExpress.Mvvm;
 using TestSystem.Models;
+using TestSystem.Services;
 
 namespace TestSystem.VeiwModels
 {
     public class CreateTestPageViewModel : BindableBase
     {
+        private readonly TestService _testService;
+
         public Test Test { get; set; }
-        public CreateTestPageViewModel()
+        public CreateTestPageViewModel(TestService testService)
         {
             Test = new Test();
             Test.Name = "Новый тест";
-            Test.Questions = new ObservableCollection<Question>()
-            {
-                new Question()
-                {
-                    Name = "Q1",
-                    Answers = new ObservableCollection<Answer>()
-                    {
-                        new Answer()
-                        {
-                            Name = "A1",
-                            IsTrue = true,
-                        },
-                        new Answer()
-                        {
-                            Name = "A2",
-                            IsTrue = false,
-                        },
-                    }
-                },
-                new Question()
-                {
-                    Name = "Q2",
-                    Answers = new ObservableCollection<Answer>()
-                    {
-                        new Answer()
-                        {
-                            Name = "A1",
-                            IsTrue = true,
-                        },
-                        new Answer()
-                        {
-                            Name = "A2",
-                            IsTrue = false,
-                        },
-                    }
-                },
-                new Question()
-                {
-                    Name = "Q3",
-                    Answers = new ObservableCollection<Answer>()
-                    {
-                        new Answer()
-                        {
-                            Name = "A1",
-                            IsTrue = true,
-                        },
-                        new Answer()
-                        {
-                            Name = "A2",
-                            IsTrue = false,
-                        },
-                    }
-                }
-            };
+            Test.Questions = new ObservableCollection<Question>();
+            _testService = testService;
         }
 
         public ICommand SaveTestCommand => new DelegateCommand(() =>
         {
-
+            _testService.SaveTest(Test);
         });
         public ICommand DeleteTestCommand => new DelegateCommand(() =>
         {
-
+            _testService.DeleteTest(Test.Id);
         });
         public ICommand AddQuestionCommand => new DelegateCommand(() =>
         {
