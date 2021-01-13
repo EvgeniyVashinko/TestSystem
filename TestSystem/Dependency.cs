@@ -18,17 +18,16 @@ namespace TestSystem
             var services = new ServiceCollection();
 
             services.AddSingleton<MainViewModel>();
-
             services.AddSingleton<StartPageViewModel>();
-
             services.AddSingleton<TestListPageViewModel>();
-
             services.AddTransient<CreateTestPageViewModel>();
-
             services.AddTransient<TestPageViewModel>();
 
-
             services.AddSingleton<PageNavigationService>();
+            services.AddSingleton<DialogService>();
+            services.AddSingleton<FileService>();
+            services.AddSingleton<CustomFileService>();
+            services.AddSingleton<TestService>();
 
             _provider = services.BuildServiceProvider();
         }
