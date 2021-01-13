@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestSystem.VeiwModels;
 using TestSystem.Services;
+using LiteDB;
 
 namespace TestSystem
 {
@@ -28,6 +29,8 @@ namespace TestSystem
             services.AddSingleton<FileService>();
             services.AddSingleton<CustomFileService>();
             services.AddSingleton<TestService>();
+            services.AddSingleton(new LiteDatabase(@"MyData.db"));
+            services.AddTransient<Repository>();
 
             _provider = services.BuildServiceProvider();
         }

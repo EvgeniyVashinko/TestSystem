@@ -13,10 +13,12 @@ namespace TestSystem.VeiwModels
     public class StartPageViewModel : BindableBase
     {
         private readonly PageNavigationService _navigation;
+        private readonly TestService _testService;
 
-        public StartPageViewModel(PageNavigationService navigationService)
+        public StartPageViewModel(PageNavigationService navigationService, TestService testService)
         {
             _navigation = navigationService;
+            _testService = testService;
         }
 
         public ICommand OpenTestsListCommand => new DelegateCommand(() =>
@@ -26,7 +28,7 @@ namespace TestSystem.VeiwModels
 
         public ICommand LoadTestCommand => new DelegateCommand(() =>
         {
-
+            _testService.LoadTest();
         });
 
         public ICommand CreateTestCommand => new DelegateCommand(() =>

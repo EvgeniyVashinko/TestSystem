@@ -15,7 +15,8 @@ namespace TestSystem.VeiwModels
     public class TestListPageViewModel : BindableBase
     {
         private readonly PageNavigationService _navigation;
-        
+        private readonly Repository _repository;
+
         public ObservableCollection<Test> Tests { get; set; }
         private Test selectedTest;
         public Test SelectedTest
@@ -28,61 +29,62 @@ namespace TestSystem.VeiwModels
                 selectedTest = null;
             }
         }
-        public TestListPageViewModel(PageNavigationService navigationService)
+        public TestListPageViewModel(PageNavigationService navigationService, Repository repository)
         {
             _navigation = navigationService;
+            _repository = repository;
 
-            Tests = new ObservableCollection<Test>() 
-            {
-                new Test
-                {
-                    Name = "Test1",
-                    Questions = new ObservableCollection<Question>()
-                    {
-                        new Question()
-                        {
-                            Name = "Q1",
-                            Answers = new ObservableCollection<Answer>()
-                            {
-                                new Answer()
-                                {
-                                    Name = "A1",
-                                    IsTrue = true,
-                                },
-                                new Answer()
-                                {
-                                    Name = "A2",
-                                    IsTrue = false,
-                                },
-                            }
-                        }
-                    }
-                },
-                new Test
-                {
-                    Name = "Test2",
-                    Questions = new ObservableCollection<Question>()
-                    {
-                        new Question()
-                        {
-                            Name = "Q1",
-                            Answers = new ObservableCollection<Answer>()
-                            {
-                                new Answer()
-                                {
-                                    Name = "A1",
-                                    IsTrue = true,
-                                },
-                                new Answer()
-                                {
-                                    Name = "A2",
-                                    IsTrue = false,
-                                },
-                            }
-                        }
-                    }
-                }
-            };
+            Tests = new ObservableCollection<Test>(_repository.FindAll<Test>());
+            //{
+            //    new Test
+            //    {
+            //        Name = "Test1",
+            //        Questions = new ObservableCollection<Question>()
+            //        {
+            //            new Question()
+            //            {
+            //                Name = "Q1",
+            //                Answers = new ObservableCollection<Answer>()
+            //                {
+            //                    new Answer()
+            //                    {
+            //                        Name = "A1",
+            //                        IsTrue = true,
+            //                    },
+            //                    new Answer()
+            //                    {
+            //                        Name = "A2",
+            //                        IsTrue = false,
+            //                    },
+            //                }
+            //            }
+            //        }
+            //    },
+            //    new Test
+            //    {
+            //        Name = "Test2",
+            //        Questions = new ObservableCollection<Question>()
+            //        {
+            //            new Question()
+            //            {
+            //                Name = "Q1",
+            //                Answers = new ObservableCollection<Answer>()
+            //                {
+            //                    new Answer()
+            //                    {
+            //                        Name = "A1",
+            //                        IsTrue = true,
+            //                    },
+            //                    new Answer()
+            //                    {
+            //                        Name = "A2",
+            //                        IsTrue = false,
+            //                    },
+            //                }
+            //            }
+            //        }
+            //    }
+            //};
         }
 
         public ICommand OpenTestCommand => new DelegateCommand(() =>
