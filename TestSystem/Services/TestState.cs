@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestSystem.Models;
+using TestSystem.Helpers;
 
 namespace TestSystem.Services
 {
@@ -48,7 +49,7 @@ namespace TestSystem.Services
 
             if (mixQ)
             {
-                MixQuestions();
+                CurrentTest.Questions.Shuffle();
             }
 
             if (mixA)
@@ -69,38 +70,12 @@ namespace TestSystem.Services
             CurrentTest.Questions = new ObservableCollection<Question>(CurrentTest.Questions.Take(num));
         }
 
-        private void MixQuestions()
-        {
-            Random rnd = new Random();
-            int count = CurrentTest.QuestionCount;
-
-            for (int i = 0; i < count; i++)
-            {
-                Swap(CurrentTest.Questions, rnd.Next(count), rnd.Next(count));
-            }
-        }
-
         private void MixAnswers()
         {
-            Random rnd = new Random();
-            int count;
-
             foreach (var question in CurrentTest.Questions)
             {
-                count = question.Answers.Count;
-
-                for (int i = 0; i < count; i++)
-                {
-                    Swap(question.Answers, rnd.Next(count), rnd.Next(count));
-                }
-            }     
-        }
-
-        private void Swap<T>(ObservableCollection<T> col ,int i1, int i2) where T : class
-        {
-            T temp = col[i1];
-            col[i1] = col[i2];
-            col[i2] = temp;
+                question.Answers.Shuffle();
+            }
         }
     }
 }
