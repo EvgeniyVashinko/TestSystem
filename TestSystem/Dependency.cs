@@ -20,17 +20,17 @@ namespace TestSystem
 
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<StartPageViewModel>();
-            services.AddSingleton<TestListPageViewModel>();
+            services.AddTransient<TestListPageViewModel>();
             services.AddTransient<CreateTestPageViewModel>();
             services.AddTransient<TestPageViewModel>();
 
             services.AddSingleton<PageNavigationService>();
             services.AddSingleton<DialogService>();
-            services.AddSingleton<FileService>();
             services.AddSingleton<CustomFileService>();
             services.AddSingleton<TestService>();
             services.AddSingleton(new LiteDatabase(@"MyData.db"));
             services.AddTransient<Repository>();
+            services.AddSingleton<TestState>();
 
             _provider = services.BuildServiceProvider();
         }

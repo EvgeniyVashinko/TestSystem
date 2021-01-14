@@ -19,5 +19,28 @@ namespace TestSystem.Models
             Id = Guid.NewGuid();
             Questions = new ObservableCollection<Question>();
         }
+
+        public bool IsCorrectTest()
+        {
+            if (String.IsNullOrWhiteSpace(Name))
+            {
+                return false;
+            }
+
+            if (QuestionCount == 0)
+            {
+                return false;
+            }
+
+            foreach (var item in Questions)
+            {
+                if (!item.IsCorrectQuestion())
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

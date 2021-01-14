@@ -15,5 +15,10 @@ namespace TestSystem.Models
         {
             Id = Guid.NewGuid();
         }
+
+        public bool IsCorrectAnswer()
+        {
+            return !String.IsNullOrWhiteSpace(Name);
+        }
     }
 }

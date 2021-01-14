@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TestSystem.Pages"
+      xmlns:f="clr-namespace:TestSystem.Models"
+      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
       DataContext="{Binding Source={StaticResource VmLocator}, Path=testListPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -16,42 +18,75 @@
         </Grid.RowDefinitions>
 
 
-        <UniformGrid Columns="2"
-                     Margin="100,10,100,10">
+        <UniformGrid Columns="3"
+                     Margin="10,10,35,10">
             <TextBlock Text="Название"
                        HorizontalAlignment="Center"
                        FontSize="18"/>
             <TextBlock Text="Количество вопросов"
                        HorizontalAlignment="Center"
                        FontSize="18"/>
+            <TextBlock Text="Действия"
+                       HorizontalAlignment="Center"
+                       FontSize="18"/>
         </UniformGrid>
 
-        <ListBox ItemsSource="{Binding Tests}"
-                 Grid.Row="1"
+        <ScrollViewer Grid.Row="1">
+            <ListBox ItemsSource="{Binding Tests}"
+                 
                  HorizontalContentAlignment="Stretch"
                  Padding="7"
                  SelectedItem="{Binding SelectedTest}">
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    
-                    <UniformGrid Columns="2"
-                                    Margin="100,5,100,5">
-                        <TextBlock Text="{Binding Name}"
-                                HorizontalAlignment="Center"
-                                    FontSize="16"/>
-                        <TextBlock Text="{Binding QuestionCount}"
-                                HorizontalAlignment="Center"
-                                    FontSize="16"/>
-                    </UniformGrid>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <UniformGrid Columns="3">
+                            <TextBlock Text="{Binding Name}"
+                                   HorizontalAlignment="Center"
+                                   FontSize="18"/>
+                            <TextBlock Text="{Binding QuestionCount}"
+                                   HorizontalAlignment="Center"
+                                   FontSize="18"/>
+                            <Grid HorizontalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
 
-                        <!--<Border.InputBindings>
-                            <MouseBinding Gesture="LeftClick"
-                                          Command="{Binding RelativeSource={RelativeSource AncestorType=Page}, Path=DataContext.OpenTestCommand}"/>
-                        </Border.InputBindings>-->
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
+                                <Button Content="▷"
+                                        FontSize="18"
+                                        Grid.Column="0"
+                                        Margin="5"
+                                        Padding="5,0"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=Page}, Path=DataContext.OpenTestCommand}"
+                                        CommandParameter="{Binding Id}"/>
 
-        </ListBox>
+                                <Button Content="🖉"
+                                FontSize="18"
+                                Grid.Column="1"
+                                Margin="5"
+                                Padding="3,0"/>
+
+                                <Button Content="🗑"
+                                        FontSize="18"
+                                        Grid.Column="2"
+                                        Margin="5"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=Page}, Path=DataContext.DeleteTestCommand}"
+                                        CommandParameter="{Binding Id}"/>
+                            </Grid>
+                        </UniformGrid>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ListBox.Resources>
+                    <col:ArrayList x:Key="as">
+                        <f:Test Name="23" />
+                        <f:Test Name="23" />
+                    </col:ArrayList>
+                </ListBox.Resources>
+            </ListBox>
+        </ScrollViewer>
+
     </Grid>
 </Page>
