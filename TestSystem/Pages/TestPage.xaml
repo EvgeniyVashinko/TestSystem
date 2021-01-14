@@ -16,6 +16,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Border BorderBrush="Black"
                 BorderThickness="1"
@@ -88,5 +90,21 @@
                 Margin="300,5"
                 Padding="5"
                 Command="{Binding NextQuestionCommand}"/>
+
+        <UniformGrid Columns="2"
+                     Grid.Row="6"
+                     Margin="50,5">
+            <Button Content="Результаты"
+                    Margin="70,10"
+                    Padding="5"
+                    FontSize="16"
+                    Command="{Binding ShowResultsCommand}"/>
+            <Button Content="Покинуть тест"
+                    Margin="70,10"
+                    Padding="5"
+                    FontSize="16"
+                    Command="{Binding LeaveTestCommand}"/>
+
+        </UniformGrid>
     </Grid>
 </Page>

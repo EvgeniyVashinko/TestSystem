@@ -98,7 +98,15 @@ namespace TestSystem.VeiwModels
         public ICommand OpenTestCommand => new DelegateCommand<Guid>((id) =>
         {
             _testState.CurrentTest = Tests.FirstOrDefault(x => x.Id == id);
-            _navigation.Navigate(new TestPage());
+            Views.TestDialogWindow dialogWindow = new Views.TestDialogWindow();
+            if (dialogWindow.ShowDialog() == true)
+            {
+                _navigation.Navigate(new TestPage());
+            }
+            else
+            {
+                //перейти в гл меню
+            }       
         });
 
         public ICommand EditTestCommand => new DelegateCommand(() =>

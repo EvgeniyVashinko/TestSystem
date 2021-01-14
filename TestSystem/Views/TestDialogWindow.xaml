@@ -1,0 +1,96 @@
+﻿<Window x:Class="TestSystem.Views.TestDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestSystem.Views"
+        FontSize="16"
+        DataContext="{Binding Source={StaticResource VmLocator}, Path=testDialogWindowViewModel}"
+        mc:Ignorable="d"
+        Title="Настройки теста" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal"
+                    Margin="5">
+            <TextBlock Text="Всего вопросов: "
+                       Padding="10,5"/>
+            <TextBlock Text="{Binding MaxQuestionNum}"
+                       Padding="10,5"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal"
+                    Margin="5"
+                    Grid.Row="1">
+            <TextBlock Text="Промежуток вопросов"
+                       Padding="10,5"
+                       Margin="5"/>
+
+            <TextBox Text="{Binding Path=StartIntervalNum}"
+                     Padding="30, 5"
+                     Margin="5"/>
+
+            <Button Content="min"
+                    Padding="10,5"
+                    Margin="5"
+                    Command="{Binding SetMinCommand}"/>
+
+            <TextBox Text="{Binding Path=EndIntervalNum}"
+                     Padding="30, 5"
+                     Margin="5"/>
+
+            <Button Content="max"
+                    Padding="10,5"
+                    Margin="5"
+                    Command="{Binding SetMaxIntervalCommand}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Margin="5"
+                    Grid.Row="2">
+            <TextBlock Text="Количество вопросов в тесте"
+                       Padding="10,5"
+                       Margin="5"/>
+
+            <TextBox Text="{Binding Path=QuestionNum}"
+                     Padding="30, 5"
+                     Margin="5"/>
+
+            <Button Content="max"
+                    Padding="10,5"
+                    Margin="5"
+                    Command="{Binding SetMaxCommand}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3"
+                    Margin="10">
+            <CheckBox Content="Перемешать вопросы"
+                      Padding="5"
+                      IsChecked="{Binding MixQuestions}"/>
+            <CheckBox Content="Перемешать ответы"
+                      Padding="5"
+                      IsChecked="{Binding MixAnswers}"/>
+        </StackPanel>
+
+        <UniformGrid Columns="2"
+                     Grid.Row="4"
+                     Margin="7">
+            <Button Content="Продолжить"
+                    Padding="5"
+                    Margin="15, 0"
+                    Command="{Binding ContinueCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                    IsDefault="True"
+                    />
+            <Button Content="Отменить"
+                    Padding="5"
+                    Margin="15, 0"
+                    IsCancel="True"/>
+        </UniformGrid>
+    </Grid>
+</Window>

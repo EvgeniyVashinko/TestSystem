@@ -23,6 +23,7 @@ namespace TestSystem
             services.AddTransient<TestListPageViewModel>();
             services.AddTransient<CreateTestPageViewModel>();
             services.AddTransient<TestPageViewModel>();
+            services.AddTransient<TestDialogWindowViewModel>();
 
             services.AddSingleton<PageNavigationService>();
             services.AddSingleton<DialogService>();

@@ -50,6 +50,16 @@ namespace TestSystem.VeiwModels
             CurrentQuestion = CopyQuestion(Test.Questions[CurrentQuestionNumber]);
         }, () => CurrentQuestionNumber < Test.QuestionCount - 1);
 
+        public ICommand ShowResultsCommand => new DelegateCommand(() =>
+        {
+            
+        }, () => CurrentQuestionNumber >= Test.QuestionCount - 1 && !IsEnabled);
+
+        public ICommand LeaveTestCommand => new DelegateCommand(() =>
+        {
+            
+        }, () => CurrentQuestionNumber >= Test.QuestionCount - 1 && !IsEnabled);
+
         private Question CopyQuestion(Question q)
         {
             var res = new Question

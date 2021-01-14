@@ -14,5 +14,6 @@ namespace TestSystem
         public TestListPageViewModel testListPageViewModel => Dependency.Resolve<TestListPageViewModel>();
         public CreateTestPageViewModel createTestPageViewModel => Dependency.Resolve<CreateTestPageViewModel>();
         public TestPageViewModel testPageViewModel => Dependency.Resolve<TestPageViewModel>();
+        public TestDialogWindowViewModel testDialogWindowViewModel => Dependency.Resolve<TestDialogWindowViewModel>();
     }
 }
