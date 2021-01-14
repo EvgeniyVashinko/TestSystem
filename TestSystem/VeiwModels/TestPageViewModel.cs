@@ -90,31 +90,20 @@ namespace TestSystem.VeiwModels
 
             IsEnabled = false;
 
-            var answers = CurrentQuestion.Answers;
+            Question question = Test.Questions[CurrentQuestionNumber];
 
-            Question question;
-
-            for (int i = 0; i < CurrentQuestion.Answers.Count; i++)
+            if (question.CheckAnswer(CurrentQuestion))
             {
-                question = Test.Questions[CurrentQuestionNumber];
-
-                if (question.Answers[i].IsTrue)
-                {
-                    CorrectAnswer = question.Answers[i];
-                }
-
-                if (answers[i].IsTrue != question.Answers[i].IsTrue)
-                {
-                    BorderColor = new SolidColorBrush(Colors.Red);
-                    _testState.WrongAnswers.Add(question);
-                    break;
-                }
-                else
-                {
-                    BorderColor = new SolidColorBrush(Colors.Green);
-                    _testState.RightAnswers.Add(question);
-                }
+                BorderColor = new SolidColorBrush(Colors.Green);
+                _testState.RightAnswers.Add(question);
             }
+            else
+            {
+                BorderColor = new SolidColorBrush(Colors.Red);
+                _testState.WrongAnswers.Add(question);
+            }
+
+            CorrectAnswer = question.GetRightAnswer();
         }
     }
 }
