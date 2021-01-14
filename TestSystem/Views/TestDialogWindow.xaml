@@ -32,7 +32,9 @@
                        Margin="5"/>
 
             <TextBox Text="{Binding Path=StartIntervalNum}"
-                     Padding="30, 5"
+                     MinWidth="70"
+                     TextAlignment="Center"
+                     Padding="5"
                      Margin="5"/>
 
             <Button Content="min"
@@ -41,7 +43,9 @@
                     Command="{Binding SetMinCommand}"/>
 
             <TextBox Text="{Binding Path=EndIntervalNum}"
-                     Padding="30, 5"
+                     MinWidth="70"
+                     TextAlignment="Center"
+                     Padding="5"
                      Margin="5"/>
 
             <Button Content="max"
@@ -58,7 +62,9 @@
                        Margin="5"/>
 
             <TextBox Text="{Binding Path=QuestionNum}"
-                     Padding="30, 5"
+                     MinWidth="70"
+                     TextAlignment="Center"
+                     Padding="5"
                      Margin="5"/>
 
             <Button Content="max"

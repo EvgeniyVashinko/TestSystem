@@ -27,7 +27,7 @@ namespace TestSystem.VeiwModels
             {
                 selectedTest = value;
                 _testState.CurrentTest = SelectedTest;
-                _navigation.Navigate(new TestPage());
+                ShowTestDialog();
             }
         }
         public TestListPageViewModel(PageNavigationService navigationService, Repository repository, TestState testState)
@@ -98,15 +98,7 @@ namespace TestSystem.VeiwModels
         public ICommand OpenTestCommand => new DelegateCommand<Guid>((id) =>
         {
             _testState.CurrentTest = Tests.FirstOrDefault(x => x.Id == id);
-            Views.TestDialogWindow dialogWindow = new Views.TestDialogWindow();
-            if (dialogWindow.ShowDialog() == true)
-            {
-                _navigation.Navigate(new TestPage());
-            }
-            else
-            {
-                //перейти в гл меню
-            }       
+            ShowTestDialog();      
         });
 
         public ICommand EditTestCommand => new DelegateCommand<Guid>((id) =>
@@ -120,5 +112,14 @@ namespace TestSystem.VeiwModels
             _repository.Delete<Test>(id);
             Tests.Remove(Tests.FirstOrDefault(x => x.Id == id));
         });
+
+        private void ShowTestDialog()
+        {
+            Views.TestDialogWindow dialogWindow = new Views.TestDialogWindow();
+            if (dialogWindow.ShowDialog() == true)
+            {
+                _navigation.Navigate(new TestPage());
+            }
+        }
     }
 }
