@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using TestSystem.Models;
+using TestSystem.Pages;
 using TestSystem.Services;
 
 namespace TestSystem.VeiwModels
@@ -16,6 +17,8 @@ namespace TestSystem.VeiwModels
     public class TestPageViewModel : BindableBase
     {
         private readonly TestState _testState;
+        private readonly PageNavigationService _navigationService;
+        private readonly DialogService _dialogService;
 
         public Test Test { get; set; }
         public int QuestionNumber => CurrentQuestionNumber + 1;
@@ -25,9 +28,11 @@ namespace TestSystem.VeiwModels
         public SolidColorBrush BorderColor { get; set; }
         public bool IsEnabled { get; set; }
 
-        public TestPageViewModel(TestState testState)
+        public TestPageViewModel(TestState testState, PageNavigationService navigationService, DialogService dialogService)
         {
             _testState = testState;
+            _navigationService = navigationService;
+            _dialogService = dialogService;
             Test = _testState.CurrentTest;
             CurrentQuestionNumber = 0;
             CurrentQuestion = CopyQuestion(Test.Questions[CurrentQuestionNumber]);
@@ -37,27 +42,48 @@ namespace TestSystem.VeiwModels
 
         public ICommand CheckAnswerCommand => new DelegateCommand(() =>
         {
-            Check();
-        });
+            IsEnabled = false;
+
+            if (Check())
+            {
+                BorderColor = new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                BorderColor = new SolidColorBrush(Colors.Red);
+            }
+
+            CorrectAnswer = Test.Questions[CurrentQuestionNumber].GetRightAnswer();
+
+        }, ()=>_testState.CanCheckAnswer && IsEnabled);
 
         public ICommand NextQuestionCommand => new DelegateCommand(() =>
         {
-            
+            Check();
             IsEnabled = true;
             BorderColor = new SolidColorBrush(Colors.Black);
             CorrectAnswer = null;
             CurrentQuestionNumber++;
-            CurrentQuestion = CopyQuestion(Test.Questions[CurrentQuestionNumber]);
-        }, () => CurrentQuestionNumber < Test.QuestionCount - 1);
+            if (CurrentQuestionNumber < Test.QuestionCount)
+            {
+                CurrentQuestion = CopyQuestion(Test.Questions[CurrentQuestionNumber]);
+            }
+            else
+            {
+                IsEnabled = false;
+                _dialogService.ShowMessage("Тест завершен, посмотрите результаты!");
+            }
+
+        }, () => CurrentQuestionNumber < Test.QuestionCount);
 
         public ICommand ShowResultsCommand => new DelegateCommand(() =>
         {
-            
+            _navigationService.Navigate(new StatisticsPage());
         }, () => CurrentQuestionNumber >= Test.QuestionCount - 1 && !IsEnabled);
 
         public ICommand LeaveTestCommand => new DelegateCommand(() =>
         {
-            
+            _navigationService.GoBack();
         }, () => CurrentQuestionNumber >= Test.QuestionCount - 1 && !IsEnabled);
 
         private Question CopyQuestion(Question q)
@@ -81,29 +107,27 @@ namespace TestSystem.VeiwModels
             return res;
         }
 
-        private void Check()
+        private bool Check()
         {
-            if (CorrectAnswer != null)
-            {
-                return;
-            }
-
-            IsEnabled = false;
-
             Question question = Test.Questions[CurrentQuestionNumber];
 
-            if (question.CheckAnswer(CurrentQuestion))
+            var isCorrect = question.CheckAnswer(CurrentQuestion);
+
+            if (CorrectAnswer != null)
             {
-                BorderColor = new SolidColorBrush(Colors.Green);
+                return isCorrect;
+            }
+
+            if (isCorrect)
+            {
                 _testState.RightAnswers.Add(question);
             }
             else
             {
-                BorderColor = new SolidColorBrush(Colors.Red);
                 _testState.WrongAnswers.Add(question);
             }
 
-            CorrectAnswer = question.GetRightAnswer();
+            return isCorrect;
         }
     }
 }

@@ -24,6 +24,7 @@ namespace TestSystem
             services.AddTransient<CreateTestPageViewModel>();
             services.AddTransient<TestPageViewModel>();
             services.AddTransient<TestDialogWindowViewModel>();
+            services.AddTransient<StatisticsPageViewModel>();
 
             services.AddSingleton<PageNavigationService>();
             services.AddSingleton<DialogService>();

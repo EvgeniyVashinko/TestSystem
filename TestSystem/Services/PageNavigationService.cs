@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using TestSystem.Pages;
 
 namespace TestSystem.Services
 {
@@ -22,6 +23,12 @@ namespace TestSystem.Services
         {
             OnPageChanged?.Invoke(page);
             pages.Push(page.GetType());
+        }
+
+        public void ToStartPage()
+        {
+            pages.Clear();
+            Navigate(new StartPage());
         }
 
         public void GoBack()

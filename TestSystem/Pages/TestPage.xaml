@@ -6,11 +6,13 @@
       xmlns:local="clr-namespace:TestSystem.Pages"
       DataContext="{Binding Source={StaticResource VmLocator}, Path=testPageViewModel}"
       mc:Ignorable="d" 
+      FontSize="18"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TestPage">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -24,14 +26,14 @@
                 CornerRadius="5"
                 Margin="150,20"
                 Padding="5"
-                Grid.Row="0">
+                Grid.Row="1">
 
             <TextBlock Text="{Binding QuestionNumber, StringFormat={} Вопрос {0}}"
                      Background="Transparent"/>
 
         </Border>
 
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="2">
             <Border BorderBrush="{Binding BorderColor}"
                 BorderThickness="1"
                 CornerRadius="5"
@@ -69,7 +71,7 @@
                 CornerRadius="5"
                 Margin="150,20,150,20"
                 Padding="5"
-                Grid.Row="2">
+                Grid.Row="3">
 
             <StackPanel>
                 <TextBlock Text="{Binding CorrectAnswer.Name, StringFormat={}Ответ: {0}}"
@@ -80,19 +82,19 @@
         </Border>
 
         <Button Content="Проверить"
-                Grid.Row="3"
+                Grid.Row="4"
                 Margin="300,5"
                 Padding="5"
                 Command="{Binding CheckAnswerCommand}"/>
         
         <Button Content="Следующий вопрос"
-                Grid.Row="4"
+                Grid.Row="5"
                 Margin="300,5"
                 Padding="5"
                 Command="{Binding NextQuestionCommand}"/>
 
         <UniformGrid Columns="2"
-                     Grid.Row="6"
+                     Grid.Row="7"
                      Margin="50,5">
             <Button Content="Результаты"
                     Margin="70,10"

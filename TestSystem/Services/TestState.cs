@@ -32,7 +32,9 @@ namespace TestSystem.Services
         public ObservableCollection<Question> RightAnswers { get; set; }
         public ObservableCollection<Question> WrongAnswers { get; set; }
         public bool ShowRightAnswers { get; set; }
-        public int TestResult => RightAnswers.Count / CurrentTest.QuestionCount;
+        public int TestResult => (int)((double)RightAnswers.Count / CurrentTest.QuestionCount * 100);
+
+        public bool CanCheckAnswer { get; set; }
 
         private void ClearState()
         {

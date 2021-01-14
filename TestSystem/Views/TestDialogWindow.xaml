@@ -81,6 +81,9 @@
             <CheckBox Content="Перемешать ответы"
                       Padding="5"
                       IsChecked="{Binding MixAnswers}"/>
+            <CheckBox Content="Проверять ответы во время теста"
+                      Padding="5"
+                      IsChecked="{Binding CanCheckAnswers}"/>
         </StackPanel>
 
         <UniformGrid Columns="2"

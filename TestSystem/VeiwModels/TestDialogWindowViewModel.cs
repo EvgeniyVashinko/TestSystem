@@ -69,17 +69,19 @@ namespace TestSystem.VeiwModels
             }
         }
 
+        public bool CanCheckAnswers { get; set; }
         public TestDialogWindowViewModel(TestState testState)
         {
             _testState = testState;
             StartIntervalNum = 1;
             QuestionNum = EndIntervalNum = MaxQuestionNum = _testState.CurrentTest.QuestionCount;
-            MixQuestions = MixAnswers = true;
+            MixQuestions = MixAnswers = CanCheckAnswers = true;
         }
 
         public ICommand ContinueCommand => new DelegateCommand<Window>((win) =>
         {
             _testState.ChangeTestParameters(StartIntervalNum, EndIntervalNum, QuestionNum, MixQuestions, MixAnswers);
+            _testState.CanCheckAnswer = CanCheckAnswers;
             win.DialogResult = true;
         }, (win) => QuestionNum > 0);
 
