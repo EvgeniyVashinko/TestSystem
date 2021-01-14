@@ -14,14 +14,14 @@ namespace TestSystem.VeiwModels
     public class CreateTestPageViewModel : BindableBase
     {
         private readonly TestService _testService;
+        private readonly TestState _testState;
 
         public Test Test { get; set; }
-        public CreateTestPageViewModel(TestService testService)
+        public CreateTestPageViewModel(TestService testService, TestState testState)
         {
-            Test = new Test();
-            Test.Name = "Новый тест";
-            Test.Questions = new ObservableCollection<Question>();
             _testService = testService;
+            _testState = testState;
+            Test = _testState.CurrentTest ?? new Test { Name = "Новый тест", Questions = new ObservableCollection<Question>() };
         }
 
         public ICommand SaveTestCommand => new DelegateCommand(() =>

@@ -4,8 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TestSystem.Pages"
-      xmlns:f="clr-namespace:TestSystem.Models"
-      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
       DataContext="{Binding Source={StaticResource VmLocator}, Path=testListPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -66,7 +64,9 @@
                                 FontSize="18"
                                 Grid.Column="1"
                                 Margin="5"
-                                Padding="3,0"/>
+                                Padding="3,0"
+                                Command="{Binding RelativeSource={RelativeSource AncestorType=Page}, Path=DataContext.EditTestCommand}"
+                                CommandParameter="{Binding Id}"/>
 
                                 <Button Content="🗑"
                                         FontSize="18"
@@ -79,12 +79,6 @@
 
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-                <ListBox.Resources>
-                    <col:ArrayList x:Key="as">
-                        <f:Test Name="23" />
-                        <f:Test Name="23" />
-                    </col:ArrayList>
-                </ListBox.Resources>
             </ListBox>
         </ScrollViewer>
 

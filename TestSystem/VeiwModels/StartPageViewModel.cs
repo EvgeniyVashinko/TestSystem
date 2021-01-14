@@ -14,11 +14,13 @@ namespace TestSystem.VeiwModels
     {
         private readonly PageNavigationService _navigation;
         private readonly TestService _testService;
+        private readonly TestState _testState;
 
-        public StartPageViewModel(PageNavigationService navigationService, TestService testService)
+        public StartPageViewModel(PageNavigationService navigationService, TestService testService, TestState testState)
         {
             _navigation = navigationService;
             _testService = testService;
+            _testState = testState;
         }
 
         public ICommand OpenTestsListCommand => new DelegateCommand(() =>
@@ -33,6 +35,7 @@ namespace TestSystem.VeiwModels
 
         public ICommand CreateTestCommand => new DelegateCommand(() =>
         {
+            _testState.CurrentTest = null;
             _navigation.Navigate(new CreateTestPage());
         });
 

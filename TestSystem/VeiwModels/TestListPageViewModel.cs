@@ -109,9 +109,10 @@ namespace TestSystem.VeiwModels
             }       
         });
 
-        public ICommand EditTestCommand => new DelegateCommand(() =>
+        public ICommand EditTestCommand => new DelegateCommand<Guid>((id) =>
         {
-
+            _testState.CurrentTest = Tests.FirstOrDefault(x => x.Id == id);
+            _navigation.Navigate(new CreateTestPage());
         });
 
         public ICommand DeleteTestCommand => new DelegateCommand<Guid>((id) =>
