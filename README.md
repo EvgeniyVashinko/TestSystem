@@ -29,7 +29,7 @@
 ```
 ***
 Скачать тест по АВС в формате .TXT можно [здесь](https://drive.google.com/file/d/1CIjA2186x9k-OWAo9Sv5pIMt2bnhY9R-/view?usp=sharing).  
-Скачать тест по АВС в формате .JSON можно [здесь](https://drive.google.com/file/d/1nzqYZWv5gVMtemRKUDg1tnb7upAAsW-K/view?usp=sharing).
+Скачать тест по АВС в формате .JSON можно [здесь](https://drive.google.com/file/d/1HATDpInJHwX7cotkYRwElEO0PHUerbOg/view?usp=sharing).
 
 Далее его необходимо загрузить, нажав на соответствующую кнопку в меню программы.  
 ***
