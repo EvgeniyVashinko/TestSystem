@@ -11,6 +11,7 @@ namespace TestSystem.Models
 {
     public class Test
     {
+        [JsonIgnore]
         public Guid Id { get; set; }
         public string Name { get; set; }
         [JsonIgnore]
