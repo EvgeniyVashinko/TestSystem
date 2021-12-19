@@ -17,6 +17,7 @@ namespace TestSystem.Models
         [JsonIgnore]
         public DateTime CreationDate { get; set; }
         public ObservableCollection<Question> Questions { get; set; }
+        [JsonIgnore]
         public int QuestionCount => Questions.Count;
         public Test()
         {
