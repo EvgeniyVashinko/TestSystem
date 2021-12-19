@@ -26,6 +26,23 @@ namespace TestSystem.Services
             return false;
         }
 
+        public bool SaveFileDialog(out string filename)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = ".json";
+            saveFileDialog.FileName = "test";
+
+            filename = "";
+
+            if (saveFileDialog.ShowDialog() is true)
+            {
+                filename = saveFileDialog.FileName;
+                return true;
+            }
+
+            return false;
+        }
+
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);

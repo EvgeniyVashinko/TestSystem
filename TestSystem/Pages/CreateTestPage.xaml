@@ -79,7 +79,7 @@
 
         </ScrollViewer>
 
-        <UniformGrid Columns="3"
+        <UniformGrid Columns="4"
                      Grid.Row="2">
             <Button Content="Добавить вопрос"
                     Padding="5"
@@ -89,6 +89,10 @@
                     Padding="5"
                     Margin="20,5"
                     Command="{Binding SaveTestCommand}"/>
+            <Button Content="Сохранить в Файл"
+                    Padding="5"
+                    Margin="20,5"
+                    Command="{Binding SaveTestToFileCommand}"/>
             <Button Content="Удалить"
                     Padding="5"
                     Margin="20,5"

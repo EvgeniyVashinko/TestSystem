@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,11 +13,14 @@ namespace TestSystem.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        [JsonIgnore]
+        public DateTime CreationDate { get; set; }
         public ObservableCollection<Question> Questions { get; set; }
         public int QuestionCount => Questions.Count;
         public Test()
         {
             Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
             Questions = new ObservableCollection<Question>();
         }
 

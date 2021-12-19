@@ -24,5 +24,12 @@ namespace TestSystem.Services
 
             return test;
         }
+
+        public virtual Test WriteTestToFile(string filepath, Test test)
+        {
+            File.WriteAllText(filepath, JsonConvert.SerializeObject(test, Formatting.Indented));
+
+            return test;
+        }
     }
 }
