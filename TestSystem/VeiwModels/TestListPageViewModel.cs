@@ -36,7 +36,7 @@ namespace TestSystem.VeiwModels
             _repository = repository;
             _testState = testState;
 
-            Tests = new ObservableCollection<Test>(_repository.FindAll<Test>());
+            Tests = new ObservableCollection<Test>(_repository.FindAll<Test>().OrderByDescending(x => x.CreationDate));
             //Tests = new ObservableCollection<Test>()
             //{
             //    new Test

@@ -49,9 +49,30 @@ namespace TestSystem.Services
 
         public void SaveTest(Test test)
         {
+            test.CreationDate = DateTime.Now;
             _repository.Save(test);
             _dialogService.ShowMessage("Тест сохранен!");
             _navigationService.GoBack();
+        }
+
+        public void SaveTestToFile(Test test)
+        {
+            if (_dialogService.SaveFileDialog(out string filepath))
+            {
+                try
+                {
+                    _customFileService.WriteTestToFile(filepath, test);
+                    _dialogService.ShowMessage("Тест сохранен успешно!");
+                }
+                catch (Exception e)
+                {
+                    _dialogService.ShowMessage(e.Message);
+                }
+            }
+            else
+            {
+                _dialogService.ShowMessage("Неверный путь к файлу");
+            }
         }
 
         public void DeleteTest(Guid testId)
@@ -64,6 +85,12 @@ namespace TestSystem.Services
         private void LoadTestFromFile(string filepath)
         {
             var test = _customFileService.ReadTestFromFile(filepath);
+
+            if (_repository.FindAll<Test>().Any(x => x.Id == test.Id))
+            {
+                test.Id = Guid.NewGuid();
+                test.CreationDate = DateTime.Now;
+            }
 
             _repository.Save(test);
         }

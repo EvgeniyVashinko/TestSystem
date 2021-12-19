@@ -8,5 +8,6 @@ namespace TestSystem.Services.Interfaces
     {
         void ShowMessage(string message);
         bool OpenFileDialog(out string path);
+        bool SaveFileDialog(out string path);
     }
 }

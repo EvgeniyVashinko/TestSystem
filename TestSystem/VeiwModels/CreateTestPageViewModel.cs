@@ -69,5 +69,10 @@ namespace TestSystem.VeiwModels
             };
             question.Answers.Add(answer);
         });
+
+        public ICommand SaveTestToFileCommand => new DelegateCommand(() =>
+        {
+            _testService.SaveTestToFile(Test);
+        });
     }
 }
