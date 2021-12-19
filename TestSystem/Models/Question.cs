@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ namespace TestSystem.Models
 {
     public class Question
     {
+        [JsonIgnore]
         public Guid Id { get; set; }
         public string Name { get; set; }
         public ObservableCollection<Answer> Answers { get; set; }
