@@ -19,9 +19,9 @@ namespace TestSystem.Services
             GetCollection<T>().Upsert(item);
         }
 
-        public void Get<T>(Guid id)
+        public T Get<T>(Guid id)
         {
-            GetCollection<T>().FindById(id);
+            return GetCollection<T>().FindById(id);
         }
 
         public void Delete<T>(Guid id)

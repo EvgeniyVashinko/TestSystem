@@ -19,7 +19,6 @@ namespace TestSystem.Services
         }
         //public override Test ReadTestFromFile(string filepath)
         //{
-        //    //return base.ReadTestFromFile(filepath);
         //    Test test = new Test
         //    {
         //        Name = "Тест по АВС",
