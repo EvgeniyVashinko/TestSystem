@@ -59,7 +59,7 @@
                                 <TextBlock Text="{Binding Name}"
                                     TextWrapping="Wrap"
                                     Padding="2"
-                                    TextAlignment="Center"/>
+                                    TextAlignment="Left"/>
                                 <ItemsControl ItemsSource="{Binding Answers}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>

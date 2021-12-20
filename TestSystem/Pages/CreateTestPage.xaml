@@ -38,7 +38,8 @@
                             <StackPanel>
                                 <TextBox Text="{Binding Name}"
                                     Padding="2"
-                                    TextAlignment="Center"/>
+                                    TextWrapping="Wrap"
+                                    TextAlignment="Left"/>
                                 <ItemsControl ItemsSource="{Binding Answers}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
@@ -49,6 +50,8 @@
                                                          Padding="2"
                                                          Grid.Column="0"/>
                                                 <TextBox Text="{Binding Name}"
+                                                         TextAlignment="Left"
+                                                         TextWrapping="Wrap"
                                                          MinWidth="100"/>
                                                 <Button Content="🗑"
                                                     Grid.Column="1"
