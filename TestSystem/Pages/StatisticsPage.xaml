@@ -57,6 +57,7 @@
                             Padding="10">
                             <StackPanel>
                                 <TextBlock Text="{Binding Name}"
+                                    TextWrapping="Wrap"
                                     Padding="2"
                                     TextAlignment="Center"/>
                                 <ItemsControl ItemsSource="{Binding Answers}">
