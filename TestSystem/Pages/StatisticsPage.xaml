@@ -63,14 +63,19 @@
                                 <ItemsControl ItemsSource="{Binding Answers}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
+                                            <WrapPanel Orientation="Horizontal">
                                                 <RadioButton
                                                          IsChecked="{Binding IsTrue}"
                                                          IsEnabled="False"
-                                                         Content="{Binding Name}"
                                                          Padding="2"
-                                                         Grid.Column="0"/>
-                                            </StackPanel>
+                                                         Grid.Column="0">
+                                                    <TextBlock
+                                                        Text="{Binding Name}"
+                                                        TextWrapping="Wrap"
+                                                        TextAlignment="Left">
+                                                    </TextBlock>
+                                                </RadioButton>
+                                            </WrapPanel>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

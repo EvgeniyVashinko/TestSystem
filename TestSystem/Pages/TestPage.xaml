@@ -48,15 +48,20 @@
                     <ItemsControl ItemsSource="{Binding CurrentQuestion.Answers}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
+                                <WrapPanel Orientation="Horizontal">
                                     <RadioButton
                                         GroupName="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=DataContext.CurrentQuestion.Id}"
                                         Padding="2"
-                                        Content="{Binding Name}"
                                         IsChecked="{Binding IsTrue}"
-                                        IsEnabled="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=DataContext.IsEnabled}"/>
+                                        IsEnabled="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=DataContext.IsEnabled}">
+                                        <TextBlock
+                                            Text="{Binding Name}"
+                                            TextWrapping="Wrap"
+                                            TextAlignment="Left">
+                                        </TextBlock>
+                                    </RadioButton>
 
-                                </StackPanel>
+                                </WrapPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
