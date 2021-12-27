@@ -27,6 +27,7 @@ namespace TestSystem.VeiwModels
         public Answer CorrectAnswer { get; set; }
         public SolidColorBrush BorderColor { get; set; }
         public bool IsEnabled { get; set; }
+        public bool CanCheckAnswer { get; set; }
 
         public TestPageViewModel(TestState testState, PageNavigationService navigationService, DialogService dialogService)
         {
@@ -38,6 +39,7 @@ namespace TestSystem.VeiwModels
             CurrentQuestion = CopyQuestion(Test.Questions[CurrentQuestionNumber]);
             BorderColor = new SolidColorBrush(Colors.Black);
             IsEnabled = true;
+            CanCheckAnswer = _testState.CanCheckAnswer;
         }
 
         public ICommand CheckAnswerCommand => new DelegateCommand(() =>
@@ -55,7 +57,7 @@ namespace TestSystem.VeiwModels
 
             CorrectAnswer = Test.Questions[CurrentQuestionNumber].GetRightAnswer();
 
-        }, ()=>_testState.CanCheckAnswer && IsEnabled && IsAnswerSelected());
+        }, () => CanCheckAnswer && IsEnabled && IsAnswerSelected());
 
         public ICommand NextQuestionCommand => new DelegateCommand(() =>
         {

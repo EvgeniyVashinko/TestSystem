@@ -92,7 +92,15 @@
                     Grid.Row="4"
                     Margin="300,5"
                     Padding="5"
-                    Command="{Binding CheckAnswerCommand}"/>
+                    Command="{Binding CheckAnswerCommand}">
+                <Button.Visibility>
+                    <Binding Path="CanCheckAnswer">
+                        <Binding.Converter>
+                            <BooleanToVisibilityConverter />
+                        </Binding.Converter>
+                    </Binding>
+                </Button.Visibility>
+            </Button>
 
             <Button Content="Следующий вопрос"
                     Grid.Row="5"
