@@ -55,7 +55,7 @@ namespace TestSystem.VeiwModels
 
             CorrectAnswer = Test.Questions[CurrentQuestionNumber].GetRightAnswer();
 
-        }, ()=>_testState.CanCheckAnswer && IsEnabled);
+        }, ()=>_testState.CanCheckAnswer && IsEnabled && IsAnswerSelected());
 
         public ICommand NextQuestionCommand => new DelegateCommand(() =>
         {
@@ -74,7 +74,25 @@ namespace TestSystem.VeiwModels
                 _dialogService.ShowMessage("Тест завершен, посмотрите результаты!");
             }
 
-        }, () => CurrentQuestionNumber < Test.QuestionCount);
+        }, () => CurrentQuestionNumber < Test.QuestionCount && IsAnswerSelected());
+
+        //public ICommand PreviousQuestionCommand => new DelegateCommand(() =>
+        //{
+        //    IsEnabled = !_testState.CanCheckAnswer;
+        //    BorderColor = new SolidColorBrush(Colors.Black);
+        //    CorrectAnswer = null;
+        //    CurrentQuestionNumber++;
+        //    if (CurrentQuestionNumber < Test.QuestionCount)
+        //    {
+        //        CurrentQuestion = CopyQuestion(Test.Questions[CurrentQuestionNumber]);
+        //    }
+        //    else
+        //    {
+        //        IsEnabled = false;
+        //        _dialogService.ShowMessage("Тест завершен, посмотрите результаты!");
+        //    }
+
+        //}, () => CurrentQuestionNumber < Test.QuestionCount && IsAnswerSelected());
 
         public ICommand ShowResultsCommand => new DelegateCommand(() =>
         {
@@ -128,6 +146,19 @@ namespace TestSystem.VeiwModels
             }
 
             return isCorrect;
+        }
+
+        private bool IsAnswerSelected()
+        {
+            foreach (var item in CurrentQuestion.Answers)
+            {
+                if (item.IsTrue == true)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
